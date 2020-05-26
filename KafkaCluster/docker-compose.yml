@@ -1,0 +1,57 @@
+# 单机 zookeeper + kafka + kafka-manager集群
+version: '2'
+
+services:
+  # 定义zookeeper服务
+  zookeeper-test:
+    image: zookeeper # zookeeper镜像
+    restart: always
+    hostname: zookeeper-test
+    ports:
+      - "12181:2181" # 宿主机端口：docker内部端口
+    container_name: zookeeper-test # 容器名称
+
+  # 定义kafka服务
+  kafka-test:
+    image: wurstmeister/kafka # kafka镜像
+    restart: always
+    hostname: kafka-test
+    ports:
+      - "9092:9092" # 对外暴露端口号
+      - "9999:9999" # 对外暴露JMX_PORT
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.105 #
+      KAFKA_ADVERTISED_PORT: 9092 # 
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-test:2181 # zookeeper服务
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 30000 # zookeeper连接超时
+      KAFKA_LOG_CLEANUP_POLICY: "delete"
+      KAFKA_LOG_RETENTION_HOURS: 120 # 设置消息数据保存的最长时间为120小时
+      KAFKA_MESSAGE_MAX_BYTES: 10000000 # 消息体的最大字节数
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 10000000 # 
+      KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS: 60000 # 
+      KAFKA_NUM_PARTITIONS: 1 # 分区数量
+      KAFKA_DELETE_RETENTION_MS: 10000 # 
+      KAFKA_BROKER_ID: 1 # kafka的ID
+      KAFKA_COMPRESSION_TYPE: lz4
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.0.105 -Dcom.sun.management.jmxremote.rmi.port=9999"  # 导入KAFKA_JMX_OPTS环境变量
+      JMX_PORT: 9999  # 导入JMX_PORT环境变量
+    depends_on:
+      - zookeeper-test # 依赖
+    container_name: kafka-test
+
+  # 定义kafka-manager服务
+  kafka-manager-test:
+    image: kafkamanager/kafka-manager # kafka-manager镜像
+    restart: always
+    container_name: kafka-manager-test
+    hostname: kafka-manager-test
+    ports:
+      - "9000:9000"  # 对外暴露端口，提供web访问
+    depends_on:
+      - kafka-test # 依赖
+    environment:
+      ZK_HOSTS: zookeeper-test:2181 # 宿主机IP
+      KAFKA_BROKERS: kafka-test:9090 # kafka
+      KAFKA_MANAGER_AUTH_ENABLED: "true"  # 开启安全认证
+      KAFKA_MANAGER_USERNAME: kafka-manager  # Kafka Manager登录用户
+      KAFKA_MANAGER_PASSWORD: 123456  # Kafka Manager登录密码

@@ -1,0 +1,175 @@
+{
+  "servers" : [ {
+    "port" : "9999",
+    "host" : "192.168.0.105",
+    "queries" : [ {
+      "obj" : "java.lang:type=Memory",
+      "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+      "resultAlias":"jvmMemory",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=FailedProduceRequestsPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=FailedFetchRequestsPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=TotalFetchRequestsPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"kafkaServer",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions",
+      "attr" : [ "Value" ],
+      "resultAlias":"underReplicated",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.controller:type=KafkaController,name=ActiveControllerCount",
+      "attr" : [ "Value" ],
+      "resultAlias":"activeController",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "java.lang:type=OperatingSystem",
+      "attr" : [ "FreePhysicalMemorySize","SystemCpuLoad","ProcessCpuLoad","SystemLoadAverage" ],
+      "resultAlias":"jvmMemory",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    } ,{
+      "obj" : "kafka.network:type=SocketServer,name=NetworkProcessorAvgIdlePercent",
+      "attr" : [ "Value" ],
+      "resultAlias":"network",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "kafka.server:type=KafkaRequestHandlerPool,name=RequestHandlerAvgIdlePercent",
+      "attr" : [ "MeanRate","OneMinuteRate","FiveMinuteRate","FifteenMinuteRate" ],
+      "resultAlias":"network",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    },{
+      "obj" : "java.lang:type=GarbageCollector,name=G1 Young Generation",
+      "attr" : [ "CollectionCount","CollectionTime" ],
+      "resultAlias":"gc",
+      "outputWriters" : [ {
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+        "url" : "http://192.168.0.105:8086/",
+        "username" : "admin",
+        "password" : "123456",
+        "database" : "jmx",
+        "tags"     : {"application" : "kafka_server"}
+      } ]
+    }]
+  } ]
+}

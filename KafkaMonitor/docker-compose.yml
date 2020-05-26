@@ -1,0 +1,26 @@
+version: '2'
+services:
+  # JMXTrans服务
+  jmxtrans:
+    image: jmxtrans/jmxtrans
+    container_name: jmxtrans
+    volumes:
+      - ./jmxtrans:/var/lib/jmxtrans
+  # InfluxDB服务
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    volumes:
+      - ./influxdb/conf:/etc/influxdb
+      - ./influxdb/data:/var/lib/influxdb/data
+      - ./influxdb/meta:/var/lib/influxdb/meta
+      - ./influxdb/wal:/var/lib/influxdb/wal
+    ports:
+      - "8086:8086" # 对外暴露端口，提供Grafana访问
+    restart: always
+  # Grafana服务
+  grafana:
+    image: grafana/grafana:6.5.0  #高版本可能存在bug
+    container_name: grafana
+    ports:
+      - "3000:3000"  # 对外暴露端口，提供web访问
