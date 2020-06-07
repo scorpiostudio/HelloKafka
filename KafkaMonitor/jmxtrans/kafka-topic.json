@@ -1,0 +1,105 @@
+ "servers" : [ {
+
+    "port" : "9999",
+
+    "host" : "10.10.20.14",
+
+    "queries" : [ {
+
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec,topic=falcon_monitor_us",
+
+      "attr" : [ "Count" ],
+
+      "resultAlias":"falcon_monitor_us",
+
+      "outputWriters" : [ {
+
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+        "url" : "http://10.10.10.10:8086/",
+
+        "username" : "root",
+
+        "password" : "root",
+
+        "database" : "jmxDB",
+
+        "tags"     : {"application" : "BytesInPerSec"}
+
+      } ]
+
+    },{
+
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec,topic=falcon_monitor_us",
+
+      "attr" : [ "Count" ],
+
+      "resultAlias":"falcon_monitor_us",
+
+      "outputWriters" : [ {
+
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+        "url" : "http://10.10.10.10:8086/",
+
+        "username" : "root",
+
+        "password" : "root",
+
+        "database" : "jmxDB",
+
+        "tags"     : {"application" : "BytesOutPerSec"}
+
+      } ]
+
+    },{
+
+      "obj" : "kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec,topic=falcon_monitor_us",
+
+      "attr" : [ "Count" ],
+
+      "resultAlias":"falcon_monitor_us",
+
+      "outputWriters" : [ {
+
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+        "url" : "http://10.10.10.10:8086/",
+
+        "username" : "root",
+
+        "password" : "root",
+
+        "database" : "jmxDB",
+
+        "tags"     : {"application" : "MessagesInPerSec"}
+
+      } ]
+
+    },{
+
+      "obj" : "kafka.log:type=Log,name=LogEndOffset,topic=falcon_monitor_us,partition=*",
+
+      "attr" : [ "Value" ],
+
+      "resultAlias":"falcon_monitor_us",
+
+      "outputWriters" : [ {
+
+        "@class" : "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+        "url" : "http://10.10.10.10:8086/",
+
+        "username" : "root",
+
+        "password" : "root",
+
+        "database" : "jmxDB",
+
+        "tags"     : {"application" : "LogEndOffset"}
+
+      } ]
+
+    }]
+
+  } ]}

@@ -1,0 +1,811 @@
+ 
+"servers" :  [ 
+	"port" :  "9999",
+	    "host" :  "10.10.20.14",
+	    "queries" :  [ {
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec",
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+		      "resultAlias": "BytesInPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "BytesInPerSec"
+			}      
+		} ]
+	}, {  
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec",
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+		      "resultAlias": "BytesOutPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "BytesOutPerSec"
+			}  
+		} ]  
+	}, {
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesRejectedPerSec",
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+		      "resultAlias": "BytesRejectedPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "BytesRejectedPerSec"
+			}
+		} ]
+	}, {
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec",
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+		      "resultAlias": "MessagesInPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "MessagesInPerSec"
+			}  
+		} ]
+	}, {
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=FetchConsumer",
+		      "attr" :  [ "Count" ],
+		      "resultAlias": "RequestsPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"request" :   "FetchConsumer"
+			}  
+		} ]
+	}, {
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=FetchFollower",
+		      "attr" :  [ "Count" ],
+		      "resultAlias": "RequestsPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"request" :   "FetchFollower"
+			}    
+		} ]
+	}, {
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=Produce",
+		      "attr" :  [ "Count" ],
+		      "resultAlias": "RequestsPerSec",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"request" :   "Produce"
+			}    
+		} ]  
+	}, {
+		"obj" :   "java.lang:type=Memory",
+		      "attr" :  [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+		      "resultAlias": "MemoryUsage",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "MemoryUsage"
+			}   
+		} ]
+	}, {
+		"obj" :   "java.lang:type=GarbageCollector,name=*",
+		      "attr" :  [ "CollectionCount", "CollectionTime" ],
+		      "resultAlias": "GC",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "GC"
+			}   
+		} ]
+	}, {
+		"obj" :   "java.lang:type=Threading",
+		      "attr" :  [ "PeakThreadCount", "ThreadCount" ],
+		      "resultAlias": "Thread",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "Thread"
+			}
+		} ]	    
+	}, {
+		"obj" :   "kafka.server:type=ReplicaFetcherManager,name=MaxLag,clientId=Replica",
+		      "attr" :  [ "Value" ],
+		      "resultAlias": "ReplicaFetcherManager",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "MaxLag"
+			}	      
+		} ] 
+	}, {
+		"obj" :   "kafka.server:type=ReplicaManager,name=PartitionCount",
+		      "attr" :  [ "Value" ],
+		      "resultAlias": "ReplicaManager",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "PartitionCount"
+			}
+		} ]
+	}, {
+		"obj" :   "kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions",
+		      "attr" :  [ "Value" ],
+		      "resultAlias": "ReplicaManager",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "UnderReplicatedPartitions"
+			}
+		} ]
+	}, {
+		"obj" :   "kafka.server:type=ReplicaManager,name=LeaderCount",
+		      "attr" :  [ "Value" ],
+		      "resultAlias": "ReplicaManager",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "LeaderCount"
+			}    
+		} ]   
+	}, {
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchConsumer",
+		      "attr" :  [ "Count", "Max" ],
+		      "resultAlias": "TotalTimeMs",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "FetchConsumer"
+			}
+		} ]    
+	}, { 
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchFollower",
+		      "attr" :  [ "Count", "Max" ],
+		      "resultAlias": "TotalTimeMs",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "FetchConsumer"
+			}
+		} ]
+	}, {
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=Produce",
+		      "attr" :  [ "Count", "Max" ],
+		      "resultAlias": "TotalTimeMs",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "Produce"
+			}     
+		} ]
+	}, {  
+		"obj" :   "kafka.server:type=ReplicaManager,name=IsrShrinksPerSec",
+		      "attr" :  [ "Count" ],
+		      "resultAlias": "ReplicaManager",
+		      "outputWriters" :  [ {
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+			        "url" :   "http://10.10.10.10:8086/",
+			        "username" :   "root",
+			        "password" :   "root",
+			        "database" :   "jmxDB",
+			        "tags"     :  {
+				"application" :   "IsrShrinksPerSec"
+			}     
+		} ]
+	}]
+} ]
+} 
+"servers" :  [ {
+
+	    
+	"port" :   "9999",
+
+	    "host" :   "10.10.20.14",
+
+	    "queries" :  [ {
+
+		      
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec",
+
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+
+		      "resultAlias": "BytesInPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "BytesInPerSec"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec",
+
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+
+		      "resultAlias": "BytesOutPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "BytesOutPerSec"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=BytesRejectedPerSec",
+
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+
+		      "resultAlias": "BytesRejectedPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "BytesRejectedPerSec"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec",
+
+		      "attr" :  [ "Count", "OneMinuteRate" ],
+
+		      "resultAlias": "MessagesInPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "MessagesInPerSec"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=FetchConsumer",
+
+		      "attr" :  [ "Count" ],
+
+		      "resultAlias": "RequestsPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"request" :   "FetchConsumer"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=FetchFollower",
+
+		      "attr" :  [ "Count" ],
+
+		      "resultAlias": "RequestsPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"request" :   "FetchFollower"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=RequestsPerSec,request=Produce",
+
+		      "attr" :  [ "Count" ],
+
+		      "resultAlias": "RequestsPerSec",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"request" :   "Produce"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "java.lang:type=Memory",
+
+		      "attr" :  [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+
+		      "resultAlias": "MemoryUsage",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "MemoryUsage"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "java.lang:type=GarbageCollector,name=*",
+
+		      "attr" :  [ "CollectionCount", "CollectionTime" ],
+
+		      "resultAlias": "GC",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "GC"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "java.lang:type=Threading",
+
+		      "attr" :  [ "PeakThreadCount", "ThreadCount" ],
+
+		      "resultAlias": "Thread",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "Thread"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=ReplicaFetcherManager,name=MaxLag,clientId=Replica",
+
+		      "attr" :  [ "Value" ],
+
+		      "resultAlias": "ReplicaFetcherManager",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "MaxLag"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=ReplicaManager,name=PartitionCount",
+
+		      "attr" :  [ "Value" ],
+
+		      "resultAlias": "ReplicaManager",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "PartitionCount"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions",
+
+		      "attr" :  [ "Value" ],
+
+		      "resultAlias": "ReplicaManager",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "UnderReplicatedPartitions"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=ReplicaManager,name=LeaderCount",
+
+		      "attr" :  [ "Value" ],
+
+		      "resultAlias": "ReplicaManager",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "LeaderCount"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchConsumer",
+
+		      "attr" :  [ "Count", "Max" ],
+
+		      "resultAlias": "TotalTimeMs",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "FetchConsumer"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchFollower",
+
+		      "attr" :  [ "Count", "Max" ],
+
+		      "resultAlias": "TotalTimeMs",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "FetchConsumer"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.network:type=RequestMetrics,name=TotalTimeMs,request=Produce",
+
+		      "attr" :  [ "Count", "Max" ],
+
+		      "resultAlias": "TotalTimeMs",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "Produce"
+			}
+
+			      
+		} ]
+
+		    
+	}, {
+
+		      
+		"obj" :   "kafka.server:type=ReplicaManager,name=IsrShrinksPerSec",
+
+		      "attr" :  [ "Count" ],
+
+		      "resultAlias": "ReplicaManager",
+
+		      "outputWriters" :  [ {
+
+			        
+			"@class" :   "com.googlecode.jmxtrans.model.output.InfluxDbWriterFactory",
+
+			        "url" :   "http://10.10.10.10:8086/",
+
+			        "username" :   "root",
+
+			        "password" :   "root",
+
+			        "database" :   "jmxDB",
+
+			        "tags"     :  {
+				"application" :   "IsrShrinksPerSec"
+			}
+
+			      
+		} ]
+
+		    
+	}]
+
+	  
+} ]
+}

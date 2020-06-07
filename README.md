@@ -21,3 +21,25 @@ docker-compose -f docker-compose.yml down
 ```
 docker-compose -f docker-compose.yml down
 ```
+
+## RdKafka
+- RdKafka使用示例
+### CKafkaProducer
+- RdKafka C API 
+- Producer
+
+### CKafkaConsumer
+- RdKafka C API 
+- Consumer
+
+### KafkaProducer
+- RdKafka C++ API 
+- Producer
+
+### KafkaConsumer
+- RdKafka C++ API 
+- Consumer
+
+
+
+
