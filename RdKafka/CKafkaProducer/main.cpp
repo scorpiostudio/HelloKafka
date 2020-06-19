@@ -27,9 +27,13 @@ int main(int argc, char *argv[])
             printf("Error: CKafkaProducer.sendMessage(): ret=%d;\n", ret);
             return 0;
         }
+        sleep(1);
     }
     return 0;
 }
+
+
+
 
 
 

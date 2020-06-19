@@ -50,7 +50,7 @@ KafkaConsumer::KafkaConsumer(const std::string& brokers, const std::string& grou
 
     m_topicConfig = RdKafka::Conf::create(RdKafka::Conf::CONF_TOPIC);
     // 获取最新的消息数据
-    errorCode = m_topicConfig->set("auto.offset.reset", "latest", errorStr);
+    errorCode = m_topicConfig->set("auto.offset.reset", "earlist", errorStr);
     if(errorCode != RdKafka::Conf::CONF_OK)
     {
         std::cout << "Topic Conf set failed: " << errorStr << std::endl;

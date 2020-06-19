@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <unistd.h>
 #include "KafkaProducer.h"
 using namespace std;
 
@@ -14,9 +15,12 @@ int main()
         char key[8] = {0};
         sprintf(key, "%d", i);
         producer.pushMessage(msg, key);
+        sleep(1);
     }
     RdKafka::wait_destroyed(5000);
 }
+
+
 
 
 
