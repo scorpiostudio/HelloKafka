@@ -34,14 +34,14 @@ services:
       KAFKA_BROKER_ID: 1 # kafka的ID
       KAFKA_COMPRESSION_TYPE: lz4
       #KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.0.105 -Dcom.sun.management.jmxremote.rmi.port=9999"  # 导入KAFKA_JMX_OPTS环境变量
-      #JMX_PORT: 9999  # 导入JMX_PORT环境变量
+      KAFKA_JMX_PORT: 9999  # 导入JMX_PORT环境变量
     depends_on:
       - zookeeper-test # 依赖
     container_name: kafka-test
 
   # 定义kafka-manager服务
   kafka-manager-test:
-    image: kafkamanager/kafka-manager # kafka-manager镜像
+    image: hlebalbau/kafka-manager # kafka-manager镜像
     restart: always
     container_name: kafka-manager-test
     hostname: kafka-manager-test
